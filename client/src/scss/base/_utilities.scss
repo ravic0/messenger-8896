@@ -1,0 +1,34 @@
+// Colors
+
+.color-white {
+    color: rgba($color-white, .9) !important;
+}
+
+
+// Padding
+
+.padding-medium {
+    padding: $padding-med;
+}
+
+.padding-small {
+    padding: $padding-small;
+}
+
+// <argin
+
+.margin-small {
+    margin: $margin-small !important;
+}
+
+// Buttons
+
+.box-shadow {
+    box-shadow: 0rem .5rem 1.5rem rgba($color-black, .15);
+}
+
+// Text
+
+.text-bold {
+    font-weight: bold !important;
+}
