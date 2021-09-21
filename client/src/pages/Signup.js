@@ -18,6 +18,11 @@ export const Signup = (props) => {
   const { user, register } = props;
   const [formErrorMessage, setFormErrorMessage] = useState({});
 
+  
+  if (user && user.id) {
+    return <Redirect to="/home" />;
+  }
+
   const handleRegister = async (event) => {
     event.preventDefault();
     const username = event.target.username.value;
@@ -33,9 +38,6 @@ export const Signup = (props) => {
     await register({ username, email, password });
   };
 
-  if (user && user.id) {
-    return <Redirect to="/home" />;
-  }
 
   return (
     <Grid container className="login">
@@ -128,7 +130,7 @@ export const Signup = (props) => {
                 </FormHelperText>
               </FormControl>
             </Grid>
-            <Button type="submit" className="btn btn-primary btn-center margin-small" variant="container" size="large">
+            <Button type="submit" className="btn btn-primary btn-center margin-small" variant="contained" size="large">
               <span className="btn-text color-white">Create</span>
             </Button>
           </Grid>

@@ -15,6 +15,10 @@ const Login = (props) => {
   const history = useHistory();
   const { user, login } = props;
 
+  if (user && user.id) {
+    return <Redirect to="/home" />;
+  }
+
   const handleLogin = async (event) => {
     event.preventDefault();
     const username = event.target.username.value;
@@ -22,10 +26,6 @@ const Login = (props) => {
 
     await login({ username, password });
   };
-
-  if (user.id) {
-    return <Redirect to="/home" />;
-  }
 
   return (
     <Grid container justify="center">

@@ -18,7 +18,7 @@
 
         &--content {
             @include absCenter;
-            top: 45%;
+            top: 40%;
             text-align: center;
 
             &-image {
@@ -41,8 +41,7 @@
         }
 
         &--form {
-            margin: 15rem;
-            margin-bottom: 0;
+            margin: 13rem 15rem 0 15rem;
             width: 50%;
 
             &-input {

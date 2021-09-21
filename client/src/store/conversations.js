@@ -25,7 +25,8 @@ export const gotConversations = (conversations) => {
   };
 };
 
-export const setNewMessage = (message, sender) => {
+export const setNewMessage = (message, sender) => { // TODO: Step 2 - Set the new message inside
+  // console.log("Step 2: Set the message inside the reducer");
   return {
     type: SET_MESSAGE,
     payload: { message, sender: sender || null },
