@@ -41,16 +41,18 @@ const Routes = (props) => {
         />
       )}
       <Switch>
-        <Route path="/login" 
-        render={({user}) => (user?.id ? <Home /> : <Login />)}
-        /> 
-        <Route path="/register" 
-        render={({user}) => (user?.id ? <Home /> : <Signup />)}
-        /> 
+        <Route
+          path="/login"
+          render={({ user }) => (user?.id ? <Home /> : <Login />)}
+        />
+        <Route
+          path="/register"
+          render={({ user }) => (user?.id ? <Home /> : <Signup />)}
+        />
         <Route
           exact
           path="/"
-          render={({user}) => (user?.id ? <Home /> : <Signup />)}
+          render={({ user }) => (user?.id ? <Home /> : <Signup />)}
         />
         <Route path="/home" component={Home} />
       </Switch>

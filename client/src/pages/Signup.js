@@ -12,13 +12,11 @@ import {
 import { register } from "../store/utils/thunkCreators"; //../../store/utils/thunkCreators
 import { BannerPlaceholder } from "../components";
 
-
 export const Signup = (props) => {
   const history = useHistory();
   const { user, register } = props;
   const [formErrorMessage, setFormErrorMessage] = useState({});
 
-  
   if (user && user.id) {
     return <Redirect to="/home" />;
   }
@@ -38,10 +36,8 @@ export const Signup = (props) => {
     await register({ username, email, password });
   };
 
-
   return (
     <Grid container className="login">
-
       {/* Left Container */}
 
       <Grid item xs={4} className="login-left__container">
@@ -50,30 +46,35 @@ export const Signup = (props) => {
 
       {/* Right Container */}
 
-
       <Grid item xs={8} className="login-right__container">
-
         <Grid item xs={12} className="login-right__container--redirect">
-          <Typography className="heading-tertiary padding-small" color="secondary" variant="h6" display="inline">Already have an account?</Typography>
+          <Typography
+            className="heading-tertiary padding-small"
+            color="secondary"
+            variant="h6"
+            display="inline"
+          >
+            Already have an account?
+          </Typography>
 
-          <Button className="btn" color="primary"
-            onClick={() => history.push("/login")}>
+          <Button
+            className="btn"
+            color="primary"
+            onClick={() => history.push("/login")}
+          >
             <span className="btn-text box-shadow">Login</span>
           </Button>
-
         </Grid>
 
-
-
-        <form className="login-right__container--form" onSubmit={handleRegister}
+        <form
+          className="login-right__container--form"
+          onSubmit={handleRegister}
         >
           <Typography className="heading-secondary text-bold" variant="h3">
             Create an account
           </Typography>
 
           <Grid>
-
-
             <Grid className="login-right__container--form-field">
               <FormControl className="login-right__container--form-field--input">
                 <TextField
@@ -99,7 +100,10 @@ export const Signup = (props) => {
               </FormControl>
             </Grid>
             <Grid className="login-right__container--form-field">
-              <FormControl className="login-right__container--form-field--input" error={!!formErrorMessage.confirmPassword}>
+              <FormControl
+                className="login-right__container--form-field--input"
+                error={!!formErrorMessage.confirmPassword}
+              >
                 <TextField
                   aria-label="password"
                   label="Password"
@@ -115,7 +119,10 @@ export const Signup = (props) => {
               </FormControl>
             </Grid>
             <Grid className="login-right__container--form-field">
-              <FormControl className="login-right__container--form-field--input" error={!!formErrorMessage.confirmPassword}>
+              <FormControl
+                className="login-right__container--form-field--input"
+                error={!!formErrorMessage.confirmPassword}
+              >
                 <TextField
                   label="Confirm Password"
                   aria-label="confirm password"
@@ -130,7 +137,12 @@ export const Signup = (props) => {
                 </FormHelperText>
               </FormControl>
             </Grid>
-            <Button type="submit" className="btn btn-primary btn-center margin-small" variant="contained" size="large">
+            <Button
+              type="submit"
+              className="btn btn-primary btn-center margin-small"
+              variant="contained"
+              size="large"
+            >
               <span className="btn-text color-white">Create</span>
             </Button>
           </Grid>

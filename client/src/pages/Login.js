@@ -27,11 +27,8 @@ export const Login = (props) => {
     await login({ username, password });
   };
 
-  
-
   return (
     <Grid container className="login">
-
       {/* Left Container */}
 
       <Grid item xs={4} className="login-left__container">
@@ -41,21 +38,36 @@ export const Login = (props) => {
       {/* Right Container */}
 
       <Grid item xs={8} className="login-right__container">
-
         <Grid item xs={12} className="login-right__container--redirect">
-        <Typography className="heading-tertiary padding-small" color="secondary" variant="h6" display="inline">Need to register?</Typography>
-          <Button className="btn" color="primary" onClick={() => history.push("/register")}>
-          <span className="btn-text box-shadow">Register</span></Button>
+          <Typography
+            className="heading-tertiary padding-small"
+            color="secondary"
+            variant="h6"
+            display="inline"
+          >
+            Need to register?
+          </Typography>
+          <Button
+            className="btn"
+            color="primary"
+            onClick={() => history.push("/register")}
+          >
+            <span className="btn-text box-shadow">Register</span>
+          </Button>
         </Grid>
 
-        <form  className="login-right__container--form" onSubmit={handleLogin}>
-        <Typography className="heading-secondary text-bold" variant="h3">
-           Welcome Back!
+        <form className="login-right__container--form" onSubmit={handleLogin}>
+          <Typography className="heading-secondary text-bold" variant="h3">
+            Welcome Back!
           </Typography>
-          
+
           <Grid>
             <Grid className="login-right__container--form-field">
-              <FormControl className="login-right__container--form-field--input" margin="normal" required>
+              <FormControl
+                className="login-right__container--form-field--input"
+                margin="normal"
+                required
+              >
                 <TextField
                   aria-label="username"
                   label="Username"
@@ -66,19 +78,28 @@ export const Login = (props) => {
               </FormControl>
             </Grid>
             <Grid className="login-right__container--form-field">
-            <FormControl className="login-right__container--form-field--input" margin="normal" required>
-              <TextField
-                label="Password"
-                aria-label="password"
-                type="password"
-                className="login-right__container--form-input"
-                name="password"
-              />
-            </FormControl>
+              <FormControl
+                className="login-right__container--form-field--input"
+                margin="normal"
+                required
+              >
+                <TextField
+                  label="Password"
+                  aria-label="password"
+                  type="password"
+                  className="login-right__container--form-input"
+                  name="password"
+                />
+              </FormControl>
             </Grid>
             <Grid>
-              <Button className="btn btn-primary btn-center margin-small" type="submit" variant="contained" size="large">
-              <span className="btn-text color-white">Login</span>
+              <Button
+                className="btn btn-primary btn-center margin-small"
+                type="submit"
+                variant="contained"
+                size="large"
+              >
+                <span className="btn-text color-white">Login</span>
               </Button>
             </Grid>
           </Grid>

@@ -1,23 +1,21 @@
 .btn {
-    padding: 1rem;
-    
-    margin: 1rem !important;
+  padding: 1rem;
 
-    &-text {
-        font-size: 1.25rem;
-        padding: 1rem 4rem;
-        display: inline-block;
-    }
+  margin: 1rem !important;
 
-    
+  &-text {
+    font-size: 1.25rem;
+    padding: 1rem 4rem;
+    display: inline-block;
+  }
 }
 
 .btn-primary {
-    background-color: $color-primary !important;
+  background-color: $color-primary !important;
 }
 
 .btn-center {
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 }
