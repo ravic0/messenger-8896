@@ -84,8 +84,6 @@ const saveMessage = async (body) => {
 };
 
 const sendMessage = (data, body) => {
-  // TODO: Step 5: Emit the socket event to say a new message has been created - verified
-  // console.log("Step 5: Emit socket event from front end. Will only be called for the sender");
   socket.emit("new-message", {
     message: data.message,
     recipientId: body.recipientId,
@@ -96,7 +94,6 @@ const sendMessage = (data, body) => {
 // message format to send: {recipientId, text, conversationId}
 // conversationId will be set to null if its a brand new conversation
 export const postMessage = (body) => async (dispatch) => {
-  // TODO: Step 1: When you send a message, first add it to the conversation then emit socket event.
   try {
     const data = await saveMessage(body);
 

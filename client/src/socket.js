@@ -19,10 +19,8 @@ socket.on("connect", () => {
     store.dispatch(removeOfflineUser(id));
   });
 
+  // When there is a new message for this particular receiver, update their chat. Only for receiver.
   socket.on("new-message", (data) => {
-    //TODO: Step 4: When there is a new message for this particular receiver, update their chat. Only for receiver.
-    // console.log("STEP 4: Received broadcast from server about a new message from a sender");
-    // fetchConversations();
     store.dispatch(setNewMessage(data.message, data.sender));
   });
 });
