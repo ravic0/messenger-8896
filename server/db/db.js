@@ -1,4 +1,6 @@
-require('dotenv').config()
+if (!process.env.DATABASE_URL) // for seeding database
+  require('dotenv').config();
+
 const Sequelize = require("sequelize");
 
 const db = new Sequelize(
