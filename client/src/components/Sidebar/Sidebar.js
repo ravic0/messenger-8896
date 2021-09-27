@@ -36,7 +36,7 @@ const Sidebar = (props) => {
         .map((conversation) => {
           return (
             <Chat
-              conversation={{ ...conversation }}
+              conversation={conversation}
               key={conversation.otherUser.username}
             />
           );

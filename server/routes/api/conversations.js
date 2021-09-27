@@ -47,6 +47,9 @@ router.get("/", async (req, res, next) => {
       ],
     });
 
+    conversations.sort((c1, c2) => c2.messages[c2.messages.length - 1].createdAt
+      - c1.messages[c1.messages.length - 1].createdAt);
+
     for (let i = conversations.length - 1; i >= 0; i--) {
       const convo = conversations[i];
       const convoJSON = convo.toJSON();
@@ -70,6 +73,7 @@ router.get("/", async (req, res, next) => {
       // set properties for notification count and latest message preview
       convoJSON.latestMessageText =
         convoJSON.messages[convoJSON.messages.length - 1].text;
+
       conversations[i] = convoJSON;
     }
 

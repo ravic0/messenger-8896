@@ -43,7 +43,7 @@ const Login = (props) => {
           <Typography>Need to log in?</Typography>
           <Button onClick={() => history.push("/login")}>Login</Button>
         </Grid>
-        <form onSubmit={handleRegister}>
+        <FormControl onSubmit={handleRegister}>
           <Grid>
             <Grid>
               <FormControl>
@@ -101,7 +101,7 @@ const Login = (props) => {
               Create
             </Button>
           </Grid>
-        </form>
+        </FormControl>
       </Box>
     </Grid>
   );
