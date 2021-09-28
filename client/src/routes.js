@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { Route, Switch, withRouter } from "react-router-dom";
-import { connect } from "react-redux";
-import { fetchUser } from "./store/utils/thunkCreators";
-import Signup from "./pages/Signup.js";
-import Login from "./pages/Login.js";
-import { Home, SnackbarError } from "./components";
+import React, { useEffect, useState } from 'react';
+import { Route, Switch, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { fetchUser } from './store/utils/thunkCreators';
+import Signup from './pages/Signup.js';
+import Login from './pages/Login.js';
+import { Home, SnackbarError } from './components';
 
 const Routes = (props) => {
   const { user, fetchUser } = props;
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState('');
   const [snackBarOpen, setSnackBarOpen] = useState(false);
 
   useEffect(() => {
@@ -18,10 +18,10 @@ const Routes = (props) => {
   useEffect(() => {
     if (user.error) {
       // check to make sure error is what we expect, in case we get an unexpected server error object
-      if (typeof user.error === "string") {
+      if (typeof user.error === 'string') {
         setErrorMessage(user.error);
       } else {
-        setErrorMessage("Internal Server Error. Please try again");
+        setErrorMessage('Internal Server Error. Please try again');
       }
       setSnackBarOpen(true);
     }
@@ -41,20 +41,10 @@ const Routes = (props) => {
         />
       )}
       <Switch>
-        <Route
-          path="/login"
-          render={({ user }) => (user?.id ? <Home /> : <Login />)}
-        />
-        <Route
-          path="/register"
-          render={({ user }) => (user?.id ? <Home /> : <Signup />)}
-        />
-        <Route
-          exact
-          path="/"
-          render={({ user }) => (user?.id ? <Home /> : <Signup />)}
-        />
-        <Route path="/home" component={Home} />
+        <Route path='/login' render={({ user }) => (user?.id ? <Home /> : <Login />)} />
+        <Route path='/register' render={({ user }) => (user?.id ? <Home /> : <Signup />)} />
+        <Route exact path='/' render={({ user }) => (user?.id ? <Home /> : <Signup />)} />
+        <Route path='/home' component={Home} />
       </Switch>
     </>
   );

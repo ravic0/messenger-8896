@@ -1,12 +1,13 @@
 export const addMessageToStore = (state, payload) => {
-  const { message, sender } = payload;
+  const { message, sender, activeChat } = payload;
   // if sender isn't null, that means the message needs to be put in a brand new convo
   if (sender !== null) {
     const newConvo = {
       id: message.conversationId,
       otherUser: sender,
       messages: [message],
-      latestMessageText: message.text
+      latestMessageText: message.text,
+      unreadMessagesCount: sender.username === activeChat ? 0 : 1,
     };
     return [newConvo, ...state];
   }
@@ -16,6 +17,8 @@ export const addMessageToStore = (state, payload) => {
       const conv = { ...convo };
       conv.messages.push(message);
       conv.latestMessageText = message.text;
+      if (conv.otherUser.username !== activeChat && message.senderId === convo.otherUser.id)
+        conv.unreadCount += 1;
       return conv;
     } else {
       return convo;
@@ -74,6 +77,35 @@ export const addNewConvoToStore = (state, recipientId, message) => {
       conv.id = message.conversationId;
       conv.messages.push(message);
       conv.latestMessageText = message.text;
+      return conv;
+    } else {
+      return convo;
+    }
+  });
+};
+
+export const setReadInStore = (state, userId, id) => {
+  return state.map((convo) => {
+    if (convo.id === id) {
+      const convoCopy = { ...convo };
+      convoCopy.messages.forEach((m) => (m.msgRead = true));
+      const messages = convoCopy.messages.filter((m) => m.senderId === userId.id);
+      convoCopy.otherUser.lastReadId =
+        messages[messages.length - 1] && messages[messages.length - 1].id;
+      return convoCopy;
+    } else {
+      return convo;
+    }
+  });
+};
+
+export const clearUnreadInStore = (state, id) => {
+  return state.map((convo) => {
+    if (convo.id === id) {
+      const conv = { ...convo };
+      conv.unreadCount = 0;
+      conv.messages.forEach((m) => (m.msgRead = true));
+      conv.unreadMessages = [];
       return conv;
     } else {
       return convo;

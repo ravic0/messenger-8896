@@ -44,8 +44,16 @@ io.on("connection", (socket) => {
     socket.broadcast.emit("new-message", {
       message: data.message,
       sender: data.sender,
+      recipientId: data.recipientId
     });
   });
+
+  socket.on("toggle-read", ({ otherUser, id }) => {
+    socket.broadcast.emit("toggle-read", {
+      userId: otherUser,
+      id
+    })
+  })
 
   socket.on("logout", (id) => {
     if (onlineUsers.includes(id)) {

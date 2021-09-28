@@ -1,16 +1,25 @@
-import { createStore, applyMiddleware, combineReducers } from "redux";
-import loggerMiddleware from "redux-logger";
-import thunkMiddleware from "redux-thunk";
+import { createStore, applyMiddleware, combineReducers } from 'redux';
+import loggerMiddleware from 'redux-logger';
+import thunkMiddleware from 'redux-thunk';
 
-import user from "./user";
-import conversations from "./conversations";
-import activeConversation from "./activeConversation";
+import user from './user';
+import conversations, { setNewMessage } from './conversations';
+import activeConversation from './activeConversation';
 
-const CLEAR_ON_LOGOUT = "CLEAR_ON_LOGOUT";
+const CLEAR_ON_LOGOUT = 'CLEAR_ON_LOGOUT';
 
 export const clearOnLogout = () => {
   return {
     type: CLEAR_ON_LOGOUT,
+  };
+};
+
+export const handleNewMessage = (message, sender, recipientId) => {
+  return (dispatch, getState) => {
+    const { activeConversation, user } = getState();
+    if (user.id === recipientId) {
+      dispatch(setNewMessage(message, sender, activeConversation));
+    }
   };
 };
 
@@ -27,7 +36,4 @@ const rootReducer = (state, action) => {
   return appReducer(state, action);
 };
 
-export default createStore(
-  rootReducer,
-  applyMiddleware(thunkMiddleware, loggerMiddleware)
-);
+export default createStore(rootReducer, applyMiddleware(thunkMiddleware, loggerMiddleware));
