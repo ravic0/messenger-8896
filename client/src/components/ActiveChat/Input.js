@@ -1,25 +1,14 @@
-import React, { useState } from "react";
-import { FormControl, FilledInput } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import { connect } from "react-redux";
-import { postMessage } from "../../store/utils/thunkCreators";
+import React, { useState } from 'react';
+import { FormControl, FilledInput } from '@material-ui/core';
+import { connect } from 'react-redux';
+import { postMessage } from '../../store/utils/thunkCreators';
+import { inputStyles } from '../../styles';
 
-const useStyles = makeStyles(() => ({
-  root: {
-    justifySelf: "flex-end",
-    marginTop: 15,
-  },
-  input: {
-    height: 70,
-    backgroundColor: "#F4F6FA",
-    borderRadius: 8,
-    marginBottom: 20,
-  },
-}));
+const useStyles = inputStyles;
 
 const Input = (props) => {
   const classes = useStyles();
-  const [text, setText] = useState("");
+  const [text, setText] = useState('');
   const { postMessage, otherUser, conversationId, user } = props;
 
   const handleChange = (event) => {
@@ -28,15 +17,19 @@ const Input = (props) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (!event.target.text.value) return;
     // add sender user info if posting to a brand new convo, so that the other user will have access to username, profile pic, etc.
     const reqBody = {
       text: event.target.text.value,
       recipientId: otherUser.id,
       conversationId,
       sender: conversationId ? null : user,
+      read: false,
+      otherUser: user
     };
     await postMessage(reqBody);
-    setText("");
+    setText('');
   };
 
   return (
@@ -45,9 +38,9 @@ const Input = (props) => {
         <FilledInput
           classes={{ root: classes.input }}
           disableUnderline
-          placeholder="Type something..."
+          placeholder='Type something...'
           value={text}
-          name="text"
+          name='text'
           onChange={handleChange}
         />
       </FormControl>
