@@ -1,15 +1,19 @@
-const Sequelize = require('sequelize');
+const { DataTypes } = require('sequelize');
 const db = require('../db');
 const crypto = require('crypto');
 
 const User = db.define('user', {
   username: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     unique: true,
     allowNull: false,
   },
+  uuid: {
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4
+  },
   email: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     unique: true,
     alloWNull: false,
     validate: {
@@ -17,10 +21,10 @@ const User = db.define('user', {
     },
   },
   photoUrl: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
   },
   password: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     validate: {
       min: 6,
     },
@@ -30,7 +34,7 @@ const User = db.define('user', {
     },
   },
   salt: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     get() {
       return () => this.getDataValue('salt');
     },
