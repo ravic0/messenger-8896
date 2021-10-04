@@ -16,7 +16,7 @@ const ChatContent = (props) => {
     <Box className={classes.root}>
       <Box>
         <Typography className={classes.username}>{otherUser.username}</Typography>
-        <Typography className={[classes.previewText, unreadCount > 0 && classes.previewUnseenText]}>
+        <Typography className={`${classes.previewText}, ${(unreadCount > 0 && classes.previewUnseenText) || ' '}`}>
           {latestMessageText}
         </Typography>
 

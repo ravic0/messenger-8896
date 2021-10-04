@@ -9,11 +9,11 @@ router.post('/', async (req, res, next) => {
       return res.sendStatus(401);
     }
     const senderId = req.user.id;
-    const { msgRead, recipientId, text, conversationId, sender } = req.body;
+    const { read, recipientId, text, conversationId, sender } = req.body;
 
     // if we already know conversation id, we can save time and just add it to message and return
     if (conversationId) {
-      const message = await Message.create({ senderId, text, conversationId, msgRead });
+      const message = await Message.create({ senderId, text, conversationId, read });
       return res.json({ message, sender });
     }
     // if we don't have conversation id, find a conversation to make sure it doesn't already exist
@@ -33,7 +33,7 @@ router.post('/', async (req, res, next) => {
       senderId,
       text,
       conversationId: conversation.id,
-      msgRead,
+      read,
     });
     res.json({ message, sender });
   } catch (error) {
@@ -49,19 +49,19 @@ router.put('/:cid', async (req, res, next) => {
     const conversation = await Conversation.findOne({ where: { id } });
 
     if (
-      !req.user ||
-      (conversation.dataValues.user1Id !== req.user.dataValues.id &&
-        conversation.dataValues.user2Id !== req.user.dataValues.id)
+      !req.user
     ) {
+      console.error("Req user: ", req.user);
+      console.error("Conversation: ", conversation);
       return res.sendStatus(401);
     }
 
-    const message = await Message.update(
-      { msgRead: true },
+    await Message.update(
+      { read: true },
       { where: { conversationId: id, senderId: otherUser.id } },
     );
 
-    res.json({ message });
+    res.sendStatus(204);
   } catch (error) {
     console.log(error);
     next(error);

@@ -88,27 +88,16 @@ export const setReadInStore = (state, userId, id) => {
   return state.map((convo) => {
     if (convo.id === id) {
       const convoCopy = { ...convo };
-      convoCopy.messages.forEach((m) => (m.msgRead = true));
+      convoCopy.unreadCount = 0;
+      convoCopy.messages.forEach((m) => m.read = true);
+      convoCopy.unreadMessages = [];
       const messages = convoCopy.messages.filter((m) => m.senderId === userId.id);
-      convoCopy.otherUser.lastReadId =
-        messages[messages.length - 1] && messages[messages.length - 1].id;
+      if (messages.length > 0)
+        convoCopy.otherUser.lastReadId =
+          messages[messages.length - 1] && messages[messages.length - 1].id;
+      else convoCopy.otherUser.lastReadId = undefined;
       return convoCopy;
-    } else {
+    } else
       return convo;
-    }
-  });
-};
-
-export const clearUnreadInStore = (state, id) => {
-  return state.map((convo) => {
-    if (convo.id === id) {
-      const conv = { ...convo };
-      conv.unreadCount = 0;
-      conv.messages.forEach((m) => (m.msgRead = true));
-      conv.unreadMessages = [];
-      return conv;
-    } else {
-      return convo;
-    }
-  });
+  })
 };

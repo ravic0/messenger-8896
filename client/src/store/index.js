@@ -3,7 +3,7 @@ import loggerMiddleware from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 
 import user from './user';
-import conversations, { setNewMessage } from './conversations';
+import conversations from './conversations';
 import activeConversation from './activeConversation';
 
 const CLEAR_ON_LOGOUT = 'CLEAR_ON_LOGOUT';
@@ -14,14 +14,6 @@ export const clearOnLogout = () => {
   };
 };
 
-export const handleNewMessage = (message, sender, recipientId) => {
-  return (dispatch, getState) => {
-    const { activeConversation, user } = getState();
-    if (user.id === recipientId) {
-      dispatch(setNewMessage(message, sender, activeConversation));
-    }
-  };
-};
 
 const appReducer = combineReducers({
   user,

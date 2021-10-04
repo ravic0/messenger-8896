@@ -77,16 +77,16 @@ router.get('/', async (req, res, next) => {
 
       // get a count of unread messages between user and otherUser
       const read = convoJSON.messages.filter(
-        (m) => m.msgRead && m.senderId !== convoJSON.otherUser.id,
+        (m) => m.read && m.senderId !== convoJSON.otherUser.id,
       );
-      convoJSON.otherUser.lastReadMessageId = read.length > 0 && read[read.length - 1].id;
+      convoJSON.otherUser.lastReadId = read.length > 0 && read[read.length - 1].id;
 
       // if message is sent by the user himself, unread messages should be 0
       // if (convoJSON.messages && convoJSON.messages[convoJSON.messages.length - 1].senderId === userId)
       //   convoJSON.unreadCount = 0;
       // else 
       convoJSON.unreadCount =
-        convoJSON.messages.filter((m) => !m.msgRead && m.senderId === convoJSON.otherUser.id)
+        convoJSON.messages.filter((m) => !m.read && m.senderId === convoJSON.otherUser.id)
           .length;
 
       // set properties for notification count and latest message preview

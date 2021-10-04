@@ -1,7 +1,7 @@
 import io from 'socket.io-client';
 import store from './store';
 import { removeOfflineUser, addOnlineUser, setRead } from './store/conversations';
-import { handleNewMessage } from './store/index';
+import { handleNewMessage } from './store/utils/thunkCreators';
 
 const socket = io(window.location.origin);
 
@@ -22,7 +22,7 @@ socket.on('connect', () => {
 
   // When there is a new message for this particular receiver, update their chat. Only for receiver.
   socket.on('new-message', (data) => {
-    store.dispatch(handleNewMessage(data.message, data.sender, data.recipientId));
+    store.dispatch(handleNewMessage(data.message, data.sender, data.recipientId, data.otherUser));
   });
 });
 
