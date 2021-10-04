@@ -49,10 +49,10 @@ router.put('/:cid', async (req, res, next) => {
     const conversation = await Conversation.findOne({ where: { id } });
 
     if (
-      !req.user
+      !req.user ||
+      (conversation.dataValues.user1Id !== req.user.dataValues.id &&
+        conversation.dataValues.user2Id !== req.user.dataValues.id)
     ) {
-      console.error("Req user: ", req.user);
-      console.error("Conversation: ", conversation);
       return res.sendStatus(401);
     }
 
