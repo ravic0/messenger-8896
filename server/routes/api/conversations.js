@@ -47,8 +47,6 @@ router.get('/', async (req, res, next) => {
       ],
     });
 
-    console.log("Conv: ", conversations);
-
     // update conversations as per the latest message received
     conversations.sort(
       (c1, c2) =>
